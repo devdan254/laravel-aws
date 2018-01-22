@@ -4,7 +4,7 @@ namespace Laravel\Aws\Events;
 
 use Aws\Sns\Message;
 
-class NotificationReceived
+class ConfirmationReceived
 {
     /**
      * @var Message
@@ -30,11 +30,27 @@ class NotificationReceived
     }
 
     /**
-     * @return mixed
+     * @return string
      */
-    public function getMessage()
+    public function getSubscribeUrl(): string
     {
-        return $this->message['Message'];
+        return $this->message['SubscribeURL'] ?? '';
+    }
+
+    /**
+     * @return bool
+     */
+    public function isSubscriptionConfirmation(): bool
+    {
+        return $this->message['Type'] === 'SubscriptionConfirmation';
+    }
+
+    /**
+     * @return bool
+     */
+    public function isUnsubscribeConfirmation(): bool
+    {
+        return $this->message['Type'] === 'UnsubscribeConfirmation';
     }
 
     /**

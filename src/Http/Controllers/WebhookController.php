@@ -7,14 +7,26 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Event;
+use Laravel\Aws\Events\ConfirmationReceived;
 use Laravel\Aws\Events\NotificationReceived;
 use Laravel\Aws\Events\SubscriptionConfirmationReceived;
 use Laravel\Aws\Events\UnsubscribeConfirmationReceived;
+use Laravel\Aws\Listeners\ConfirmationHandler;
 use Laravel\Aws\Sns\Message;
 
 class WebhookController extends Controller
 {
     /**
+     * Constructor.
+     */
+    public function __construct()
+    {
+        Event::listen(ConfirmationReceived::class, ConfirmationHandler::class);
+    }
+
+    /**
+     * Action
+     *
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
@@ -47,9 +59,9 @@ class WebhookController extends Controller
             return $this->responseCode(Response::HTTP_OK);
 
         } catch (\RuntimeException $exception) {
-            Log::error($exception->getMessage() . PHP_EOL . $exception->getTraceAsString());
+            Log::debug($exception->getMessage() . PHP_EOL . $exception->getTraceAsString());
         } catch (\InvalidArgumentException $exception) {
-            Log::error($exception->getMessage() . PHP_EOL . $exception->getTraceAsString());
+            Log::debug($exception->getMessage() . PHP_EOL . $exception->getTraceAsString());
         }
 
         return $this->responseCode(Response::HTTP_BAD_REQUEST);

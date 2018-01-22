@@ -2,7 +2,7 @@
 
 namespace Laravel\Aws\Events;
 
-class SubscriptionConfirmationReceived extends ConfirmationReveiced
+class SubscriptionConfirmationReceived extends ConfirmationReceived
 {
-
+    //
 }

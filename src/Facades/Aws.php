@@ -20,9 +20,10 @@ class Aws extends Facade
 
     /**
      * @param string $path
+     * @return \Illuminate\Support\Facades\Route
      */
     public static function routes($path = '/webhook/aws')
     {
-        Route::post($path, WebhookController::class);
+        return Route::post($path, WebhookController::class);
     }
 }

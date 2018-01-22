@@ -16,9 +16,12 @@ Easy working with AWS SDK and SNS service for Your Laravel 5.4+ Application.
     - [Composer](#composer)
     - [Service Provider and Facade](#service-provider-and-facade)
     - [Config file](#config-file)
-    - [Contract and Traits](#contract-and-traits)
 - [Usage](#usage)
 - [Events](#events)
+    - [ConfirmationReceived event](#confirmationreceived-event)
+    - [SubscriptionConfirmationReceived event](#subscriptionconfirmationreceived-event)
+    - [UnsubscribeConfirmationReceived event](#unsubscribeconfirmationreceived-event)
+    - [NotificationReceived event](#notificationreceived event)
 - [Config File](#config-file)
 - [Changelog](#changelog)
 - [Testing](#testing)
@@ -94,6 +97,23 @@ $ php artisan vendor:publish --provider="Laravel\Aws\AwsServiceProvider"
 
 ## Events
 
+### ConfirmationReceived event
+
+This event class is parent class of two event classes: `SubscriptionConfirmationReceived` and `UnsubscribeConfirmationReceived`.
+You can listen this event to listen two child events. Eg. `ConfirmationHandler` class handle those, it will send request to `SubscribeURL`.
+
+### SubscriptionConfirmationReceived event
+
+This event will be fire when WebHook received a message type `SubscriptionConfirmation` 
+
+### UnsubscribeConfirmationReceived event
+
+This event will be fire when WebHook received a message type `UnsubscribeConfirmation` 
+
+### NotificationReceived event
+
+This event will be fire when WebHook received a message type `Notification`. You can listen this for your application logic.
+Eg. Handle video processing successful by Elastic Transcoding
 
 ## Config File
 

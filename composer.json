@@ -1,0 +1,66 @@
+{
+  "name": "oanhnn/laravel-aws",
+  "type": "library",
+  "description": "Integrate AWS SDK to Laravel.",
+  "keywords": [
+    "aws",
+    "aws-sdk",
+    "laravel",
+    "sns"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/oanhnn/laravel-aws",
+  "support": {
+    "issues": "https://github.com/oanhnn/laravel-aws/issues",
+    "source": "https://github.com/oanhnn/laravel-aws"
+  },
+  "authors": [
+    {
+      "name": "Oanh Nguyen",
+      "email": "oanhnn.bk@gmail.com"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "Laravel\\Aws\\": "src/"
+    }
+  },
+  "require": {
+    "php": ">=7.0",
+    "aws/aws-php-sns-message-validator": "^1.4",
+    "aws/aws-sdk-php": "^3.51",
+    "guzzlehttp/guzzle": "^6.3",
+    "illuminate/cache": "5.4.*|5.5.*",
+    "illuminate/container": "5.4.*|5.5.*",
+    "illuminate/contracts": "5.4.*|5.5.*",
+    "illuminate/events": "5.4.*|5.5.*",
+    "illuminate/queue": "5.4.*|5.5.*",
+    "illuminate/support": "5.4.*|5.5.*"
+  },
+  "require-dev": {
+    "mockery/mockery": "~0.9",
+    "orchestra/testbench": "^3.4",
+    "phpunit/phpunit": "~6.1",
+    "squizlabs/php_codesniffer": "^3.0"
+  },
+  "scripts": {
+    "phpunit": "php vendor/phpunit/phpunit/phpunit --coverage-html build/coverage",
+    "phpcs": "php vendor/squizlabs/php_codesniffer/bin/phpcs",
+    "phpcbf": "php vendor/squizlabs/php_codesniffer/bin/phpcbf"
+  },
+  "config": {
+    "preferred-install": "dist",
+    "sort-packages": true,
+    "optimize-autoloader": true
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "Laravel\\Aws\\AwsServiceProvider"
+      ],
+      "aliases": {
+        "AWS": "Laravel\\Aws\\Facades\\Aws"
+      }
+    }
+  }
+}
